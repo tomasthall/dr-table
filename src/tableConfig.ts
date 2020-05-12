@@ -6,6 +6,6 @@ export const config = {
         { columnName: 'profession', columnWidth: 500, },
         { columnName: 'salary', columnWidth: 300, },
         { columnName: 'location', columnWidth: 400, },
-        { columnName: 'available', columnWidth: 50, },
+        { columnName: 'available', columnWidth: 100, },
     ],
 }
