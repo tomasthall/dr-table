@@ -1,0 +1,12 @@
+.App {
+  text-align: center;
+  background-color: #151a67;
+  color: white;
+  height: 100vh;
+  position: relative;
+
+  .table-wrapper {
+    overflow-x: scroll;
+    height: 80vh;
+  }
+}

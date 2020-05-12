@@ -1,7 +1,11 @@
 .App {
   text-align: center;
-  background-color: #282c34;
+  background-color: #151a67;
   color: white;
-  height: 100%;
-  width: 100%;
-}
+  height: 100vh;
+  position: relative; }
+  .App .table-wrapper {
+    overflow-x: scroll;
+    height: 80vh; }
+
+/*# sourceMappingURL=App.css.map */
