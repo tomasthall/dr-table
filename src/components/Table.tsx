@@ -54,7 +54,7 @@ class Table extends Component<Props, State> {
                 <TableHeader key={header.columnName} width={header.columnWidth}
                              onClick={() => this.setSorting(header.columnName)}>{header.columnName}</TableHeader>
             ))
-            })}</TableRow>
+            }</TableRow>
         )
     }
 
