@@ -19,6 +19,7 @@ type Props = {
 
 type State = {
     currentSort: string,
+    animateCells: boolean,
 };
 
 class Table extends Component<Props, State> {
@@ -26,30 +27,48 @@ class Table extends Component<Props, State> {
         super(props);
         this.state = {
             currentSort: 'name',
+            animateCells: false,
         }
     }
+
+    componentDidUpdate(prevProps: Props, prevState: State): void {
+        if (prevState.currentSort !== this.state.currentSort) {
+
+        }
+    }
+
     setSorting = (columnName: string) => {
         this.setState({
-            currentSort: columnName
-        } as State)
+            currentSort: columnName,
+            animateCells: true
+        } as State, () => {
+            setTimeout(() => {
+                this.setState({ animateCells: false })
+            },300)
+        });
     }
 
     renderTableHeaders = (tableHeaders: TableHeaders[]) => {
         return (
-            <TableRow>{tableHeaders.map(header => <TableHeader width={header.columnWidth} onClick={() => this.setSorting(header.columnName)}>{header.columnName}</TableHeader>)}</TableRow>
+            <TableRow>{tableHeaders.map(header => (
+                <TableHeader key={header.columnName} width={header.columnWidth}
+                             onClick={() => this.setSorting(header.columnName)}>{header.columnName}</TableHeader>
+            ))
+            })}</TableRow>
         )
     }
 
     renderTableCells = (tableRow: TableData, lastColumnWidth: number) => {
+        const {animateCells} = this.state;
         return (
             <>
-                <TableCell>{tableRow.id}</TableCell>
-                <TableCell>{tableRow.name}</TableCell>
-                <TableCell>{tableRow.surname}</TableCell>
-                <TableCell>{tableRow.profession}</TableCell>
-                <TableCell>{tableRow.salary}</TableCell>
-                <TableCell>{tableRow.location}</TableCell>
-                <TableCell lastCell lastColumnWidth={lastColumnWidth}>{tableRow.available ? '' : 'not'} available</TableCell>
+                <TableCell animated={animateCells}>{tableRow.id}</TableCell>
+                <TableCell animated={animateCells}>{tableRow.name}</TableCell>
+                <TableCell animated={animateCells}>{tableRow.surname}</TableCell>
+                <TableCell animated={animateCells}>{tableRow.profession}</TableCell>
+                <TableCell animated={animateCells}>{tableRow.salary}</TableCell>
+                <TableCell animated={animateCells}>{tableRow.location}</TableCell>
+                <TableCell animated={animateCells} lastCell lastColumnWidth={lastColumnWidth}>{tableRow.available ? '' : 'not'} available</TableCell>
             </>
         )
     }
@@ -68,10 +87,14 @@ class Table extends Component<Props, State> {
         const lastColumnWidth: number = config.tableHeaders[config.tableHeaders.length - 1].columnWidth;
         return (
             <StyledTable lastColumnWidth={lastColumnWidth}>
-                {this.renderTableHeaders(config.tableHeaders)}
-                {(data.sort((left, right) => this.compareRowElements(left, right, currentSort))).map(tableRow => <TableRow>
-                    {this.renderTableCells(tableRow, lastColumnWidth)}
-                </TableRow>)}
+                <thead>
+                    {this.renderTableHeaders(config.tableHeaders)}
+                </thead>
+                <tbody>
+                    {(data.sort((left, right) => this.compareRowElements(left, right, currentSort))).map((tableRow, idx) => <TableRow key={idx}>
+                        {this.renderTableCells(tableRow, lastColumnWidth)}
+                    </TableRow>)}
+                </tbody>
             </StyledTable>
         )
     }

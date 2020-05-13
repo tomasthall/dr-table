@@ -1,4 +1,4 @@
-import styled, {keyframes} from "styled-components";
+import styled, {css, keyframes} from "styled-components";
 
 const animationName = keyframes`
   0% { opacity: 0; }
@@ -49,13 +49,15 @@ export const TableRow = styled.tr`
     height: auto;
 `;
 
-export const TableCell = styled.td<{lastCell?: boolean, lastColumnWidth?: number}>`
+export const TableCell = styled.td<{lastCell?: boolean, lastColumnWidth?: number, animated?: boolean}>`
     border: 1px solid white;
     height: 100px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    animation: ${animationName} 0.3s;
+    ${props => props.animated && css`
+        animation: ${animationName} 0.5s;
+    `}
     background: #151a67;
     ${props => props.lastCell && props.lastColumnWidth &&`
         right: 0;
