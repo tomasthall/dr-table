@@ -31,12 +31,6 @@ class Table extends Component<Props, State> {
         }
     }
 
-    componentDidUpdate(prevProps: Props, prevState: State): void {
-        if (prevState.currentSort !== this.state.currentSort) {
-
-        }
-    }
-
     setSorting = (columnName: string) => {
         this.setState({
             currentSort: columnName,
