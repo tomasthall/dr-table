@@ -54,15 +54,16 @@ class Table extends Component<Props, State> {
 
     renderTableCells = (tableRow: TableData, lastColumnWidth: number) => {
         const {animateCells} = this.state;
+        const {id, name, surname, profession, salary, location, available} = tableRow;
         return (
             <>
-                <TableCell animated={animateCells}>{tableRow.id}</TableCell>
-                <TableCell animated={animateCells}>{tableRow.name}</TableCell>
-                <TableCell animated={animateCells}>{tableRow.surname}</TableCell>
-                <TableCell animated={animateCells}>{tableRow.profession}</TableCell>
-                <TableCell animated={animateCells}>{tableRow.salary}</TableCell>
-                <TableCell animated={animateCells}>{tableRow.location}</TableCell>
-                <TableCell animated={animateCells} lastCell lastColumnWidth={lastColumnWidth}>{tableRow.available ? '' : 'not'} available</TableCell>
+                <TableCell animated={animateCells}>{id}</TableCell>
+                <TableCell animated={animateCells}>{name}</TableCell>
+                <TableCell animated={animateCells}>{surname}</TableCell>
+                <TableCell animated={animateCells}>{profession}</TableCell>
+                <TableCell animated={animateCells}>{salary}</TableCell>
+                <TableCell animated={animateCells}>{location}</TableCell>
+                <TableCell animated={animateCells} lastCell lastColumnWidth={lastColumnWidth}>{available ? '' : 'not'} available</TableCell>
             </>
         )
     }
